@@ -2,6 +2,18 @@
 
 This project is about building a complete data pipeline to collect, process, and analyze cryptocurrency market data using some of the latest tools like Apache Airflow, Docker, AWS S3, and Power BI. The idea is to automatically fetch up-to-date crypto prices and historical metrics from the CoinGecko API, clean and merge the data, store it safely on the cloud, and finally visualize it with interactive dashboards. The whole setup is designed to run anywhere thanks to Docker and Airflow’s workflow management, making the process repeatable and easy to maintain.
 
+# Steps to run the project
+step 1 : create AWS account with IAM user and get access key as well as secret access key
+step 2 : create a three buckets, One for current data and historical data, other one for merged data(current an dhistorical). create JSON policies and attach it to IAM to give IAM the access to this bucket.
+step 3 : Replace credentials in .env file with with your access as well as secrete access key and replace buckets names in the scripts with your own bucket names.
+step 4 : install, docker, docker-compose and vs code in your machine(linux kernel with ubuntu  OS is preferred)
+step 5 : open terminal and initiate airflow project with below commands
+ docker compose up airflow-init
+ docker compose up -d
+
+ open http://127.0.0.1:8080/home in your prefeered web browser
+ 
+
 # 🚀 Features
 
 🔗 Fetches live crypto market data and historical metrics
