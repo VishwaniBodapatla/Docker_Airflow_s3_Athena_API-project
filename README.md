@@ -62,29 +62,43 @@ To run this Airflow-based crypto ETL project elsewhere, a few key files ensure e
    
    # How the DAG Works and Its Tasks
  
-    First, it fetches the current cryptocurrency data by calling CoinGecko’s API for the top 20 coins. This data includes prices, market caps, and volumes. The data is then saved locally as a CSV file.
+    a. First, it fetches the current cryptocurrency data by calling CoinGecko’s API for the top 20 coins. This data includes prices, market caps, and volumes. The data is then saved locally as a CSV file.
 
-    Next, it runs another task that fetches historical market data and OHLC (Open, High, Low, Close) price metrics by looping over each coin’s ID. This is done through a script in the scripts folder which handles how often we call the API to avoid getting blocked.
+    b. Next, it runs another task that fetches historical market data and OHLC (Open, High, Low, Close) price metrics by looping over each coin’s ID. This is done through a script in the scripts folder which handles how often we call the API to avoid getting blocked.
 
-    After the data is fetched, the pipeline transforms both current and historical data by cleaning up missing values, rounding numbers for neatness, renaming columns for consistency, and then merging these datasets together. This creates a clean, combined CSV ready for analysis.
+    c. After the data is fetched, the pipeline transforms both current and historical data by cleaning up missing values, rounding numbers for neatness, renaming columns for consistency, and then merging these datasets together. This creates a clean, combined CSV ready for analysis.
 
-    Then the pipeline uploads all these processed files to AWS S3 into organized folders. This way, data is stored safely and can be accessed later for reporting or other use cases.
+    d. Then the pipeline uploads all these processed files to AWS S3 into organized folders. This way, data is stored safely and can be accessed later for reporting or other use cases.
 
-    Finally, it cleans up old data in S3 by deleting files older than seven days, which keeps storage costs low and the bucket tidy.
+    e. Finally, it cleans up old data in S3 by deleting files older than seven days, which keeps storage costs low and the bucket tidy.
     
-    Besides this main workflow, there’s a secondary process that uploads older historical data to a separate S3 bucket. After both pipelines finish, a final task merges the data again and uploads the consolidated results to another dedicated bucket. This setup helps keep raw data, processed data, and merged data well separated for better management.
+    f.Besides this main workflow, there’s a secondary process that uploads older historical data to a separate S3 bucket. After both pipelines finish, a final task merges the data again and uploads the consolidated results to another dedicated bucket. This setup helps keep raw data, processed data, and merged data well separated for better management.
     
-![ChatGPT Image May 22, 2025, 07_48_23 PM](https://github.com/user-attachments/assets/cf1ed55e-1101-4b3c-8e09-b8a27d89b524)
+<img src="https://github.com/user-attachments/assets/cf1ed55e-1101-4b3c-8e09-b8a27d89b524" width="400"/>
 
 ![Airflow_taskFlow](https://github.com/user-attachments/assets/6daad253-0174-4d9c-9732-05b6b7ef7e07)
 
 
 
-# About Fetching Data and Handling API Limits
+# Integration with Athena and Power BI
+Though not directly included in the project files, I leveraged AWS Athena and Power BI to extend the analytical capabilities of this ETL pipeline:
 
-All the data fetching logic is inside the scripts/fetch_crypto_metrics.py file. CoinGecko, like many free APIs, limits how many requests you can make — in this case, 50 calls per minute. To respect this, the script keeps track of how many API calls it’s made and pauses if it’s about to exceed the limit. This prevents the pipeline from breaking due to rate limiting errors.
+Athena was used to run SQL queries directly against the S3 data lake containing the uploaded crypto datasets. I registered the S3 buckets as external tables in Athena’s Glue Data Catalog and wrote optimized SQL queries to extract time-series OHLC data and aggregate metrics for various coins.
 
-The script fetches data coin by coin, collects all responses into one big dataset, and then saves it to CSV. This modular and smart approach helps keep the code clean, reliable, and efficient.
+Using the ODBC connector, I connected Power BI Desktop to Athena, enabling live querying of large-scale historical and current data without data duplication or manual exports.
+
+In Power BI, I designed interactive visualizations:
+
+Candlestick charts to display historical OHLC price movements per coin, supporting detailed trend analysis.
+
+Line charts showing overall market trends with slicers allowing users to filter by coin symbol interactively.
+
+Column charts comparing the prices of multiple coins side-by-side for snapshot comparisons.
+
+The use of Athena and Power BI together demonstrates advanced knowledge in cloud data warehousing, SQL querying over serverless infrastructures, and dynamic business intelligence visualization, bridging the gap between raw data ingestion and actionable insights.
+
+![PowerBIDashboardAthena](https://github.com/user-attachments/assets/28c20945-35be-4995-b4e0-d37ed203573d)
+
     
 
 📄 License
