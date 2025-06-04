@@ -2,6 +2,9 @@
 
 This project is about building a complete data pipeline to collect, process, and analyze cryptocurrency market data using some of the latest tools like Apache Airflow, Docker, AWS S3, and Power BI. The idea is to automatically fetch up-to-date crypto prices and historical metrics from the CoinGecko API, clean and merge the data, store it safely on the cloud, and finally visualize it with interactive dashboards. The whole setup is designed to run anywhere thanks to Docker and Airflow’s workflow management, making the process repeatable and easy to maintain.
 
+![Airflow_docker_AWS_PowerBI_Pipeline](https://github.com/user-attachments/assets/30f2275b-2771-4954-b43a-9571328e5659)
+
+
 
 ## 🚀 Steps to Run the Project
 
@@ -70,6 +73,10 @@ To run this Airflow-based crypto ETL project elsewhere, a few key files ensure e
     Finally, it cleans up old data in S3 by deleting files older than seven days, which keeps storage costs low and the bucket tidy.
     
     Besides this main workflow, there’s a secondary process that uploads older historical data to a separate S3 bucket. After both pipelines finish, a final task merges the data again and uploads the consolidated results to another dedicated bucket. This setup helps keep raw data, processed data, and merged data well separated for better management.
+    ![ChatGPT Image May 22, 2025, 07_48_23 PM](https://github.com/user-attachments/assets/cf1ed55e-1101-4b3c-8e09-b8a27d89b524)
+
+    ![Airflow_taskFlow](https://github.com/user-attachments/assets/6daad253-0174-4d9c-9732-05b6b7ef7e07)
+
 
 
 # About Fetching Data and Handling API Limits
