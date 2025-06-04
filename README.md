@@ -2,16 +2,24 @@
 
 This project is about building a complete data pipeline to collect, process, and analyze cryptocurrency market data using some of the latest tools like Apache Airflow, Docker, AWS S3, and Power BI. The idea is to automatically fetch up-to-date crypto prices and historical metrics from the CoinGecko API, clean and merge the data, store it safely on the cloud, and finally visualize it with interactive dashboards. The whole setup is designed to run anywhere thanks to Docker and Airflow’s workflow management, making the process repeatable and easy to maintain.
 
-# Steps to run the project
-step 1 : create AWS account with IAM user and get access key as well as secret access key
-step 2 : create a three buckets, One for current data and historical data, other one for merged data(current an dhistorical). create JSON policies and attach it to IAM to give IAM the access to this bucket.
-step 3 : Replace credentials in .env file with with your access as well as secrete access key and replace buckets names in the scripts with your own bucket names.
-step 4 : install, docker, docker-compose and vs code in your machine(linux kernel with ubuntu  OS is preferred)
-step 5 : open terminal and initiate airflow project with below commands
- docker compose up airflow-init
- docker compose up -d
+## 🚀 Steps to Run the Project
 
- open http://127.0.0.1:8080/home in your prefeered web browser
+**Step 1:** Create an AWS account with an IAM user and get the **Access Key** as well as **Secret Access Key**.
+
+**Step 2:** Create three S3 buckets — one for current data, one for historical data, and another for merged data (current + historical). Create JSON policies and attach them to the IAM user to grant access to these buckets.
+
+**Step 3:** Replace credentials in the `.env` file with your **Access Key** and **Secret Access Key**, and update the bucket names in the scripts with your own bucket names.
+
+**Step 4:** Install **Docker**, **Docker Compose**, and **VS Code** on your machine (Linux kernel with **Ubuntu OS** is preferred).
+
+**Step 5:** Open a terminal and initiate the Airflow project using the following commands:
+
+```bash
+docker compose up airflow-init
+docker compose up -d
+
+**Step 6:** Open http://127.0.0.1:8080/home in your preferred web browser.
+
  
 
 # 🚀 Features
