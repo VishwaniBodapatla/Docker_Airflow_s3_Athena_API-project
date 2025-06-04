@@ -17,9 +17,13 @@ This project is about building a complete data pipeline to collect, process, and
 
 ```bash
 docker compose up airflow-init
-docker compose up -d ```
+docker compose up -d
+```
 
-**Step 6:** Open http://127.0.0.1:8080/home in your preferred web browser.
+**Step 6:** Open [http://127.0.0.1:8080/home](http://127.0.0.1:8080/home) in your preferred web browser.
+
+---
+
 
  
 
