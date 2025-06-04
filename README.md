@@ -80,24 +80,23 @@ To run this Airflow-based crypto ETL project elsewhere, a few key files ensure e
 
 
 
-# Integration with Athena and Power BI
-Though not directly included in the project files, I leveraged AWS Athena and Power BI to extend the analytical capabilities of this ETL pipeline:
+📊 Integration with Athena and Power BI
+⚙️ This integration enhances the analytical power of the ETL pipeline by connecting processed S3 data to powerful visualization tools, even though it's not part of the core codebase.
 
-Athena was used to run SQL queries directly against the S3 data lake containing the uploaded crypto datasets. I registered the S3 buckets as external tables in Athena’s Glue Data Catalog and wrote optimized SQL queries to extract time-series OHLC data and aggregate metrics for various coins.
+🔌 Workflow Overview
+a. Querying with AWS Athena:
 
-Using the ODBC connector, I connected Power BI Desktop to Athena, enabling live querying of large-scale historical and current data without data duplication or manual exports.
+Athena was configured to query directly against the S3 data lake containing uploaded crypto datasets.External tables were registered via AWS Glue Data Catalog, allowing Athena to interpret raw .csv files as SQL-readable tables.Custom SQL queries were crafted to extract OHLC time-series data, aggregated statistics, and coin-level metrics.
 
-In Power BI, I designed interactive visualizations:
+b. Connecting Power BI via ODBC:
 
-Candlestick charts to display historical OHLC price movements per coin, supporting detailed trend analysis.
+Used the ODBC connector to link Power BI Desktop with Athena, enabling real-time querying of cloud-hosted data.Eliminated the need for manual downloads or data duplication.
 
-Line charts showing overall market trends with slicers allowing users to filter by coin symbol interactively.
+c. Visualization in Power BI:
 
-Column charts comparing the prices of multiple coins side-by-side for snapshot comparisons.
+📈 Candlestick Charts: Represented historical OHLC data per coin for pattern recognition and price trend analysis.📊 Line Charts: Tracked market movement over time; integrated with slicers for dynamic filtering by coin symbol.🧱 Column Charts: Compared current prices across various coins to offer quick insights into market value distribution.
 
-The use of Athena and Power BI together demonstrates advanced knowledge in cloud data warehousing, SQL querying over serverless infrastructures, and dynamic business intelligence visualization, bridging the gap between raw data ingestion and actionable insights.
-
-![PowerBIDashboardAthena](https://github.com/user-attachments/assets/28c20945-35be-4995-b4e0-d37ed203573d)
+<img src="https://github.com/user-attachments/assets/28c20945-35be-4995-b4e0-d37ed203573d" width="600"/>
 
     
 
