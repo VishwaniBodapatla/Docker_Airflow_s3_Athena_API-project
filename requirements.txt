@@ -1,0 +1,5 @@
+pandas
+boto3
+requests
+apache-airflow-providers-amazon==8.16.0
+apache-airflow-providers-http==4.8.0
