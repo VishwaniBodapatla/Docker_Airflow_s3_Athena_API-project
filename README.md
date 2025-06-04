@@ -16,9 +16,12 @@ This project is about building a complete data pipeline to collect, process, and
 
 **Step 4:** Install **Docker**, **Docker Compose**, and **VS Code** on your machine (Linux kernel with **Ubuntu OS** is preferred).
 
-**Step 5:** Open a terminal and initiate the Airflow project using the following commands:
+
+**Step 5:** Open a terminal and initiate the Airflow project using the following commands (create logs and plugins only once):
 
 ```bash
+mkdir -p ./logs
+mkdir -p ./plugins
 docker compose up airflow-init
 docker compose up -d
 ```
